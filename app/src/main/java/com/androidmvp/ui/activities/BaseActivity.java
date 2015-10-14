@@ -1,4 +1,4 @@
-package com.androidmvp.views.activities;
+package com.androidmvp.ui.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.androidmvp.presenters.Presenter;
 import com.androidmvp.presenters.PresenterAccessor;
+import com.androidmvp.ui.callbacks.CallbackManager;
 
 /**
  * Created by Zatsepin on 14.10.2015.
@@ -17,30 +18,16 @@ public abstract class BaseActivity<P extends Presenter> extends Activity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RetainFragment reFragment = (RetainFragment)getFragmentManager().findFragmentByTag(RetainFragment.TAG);
+        CallbackManager reFragment = (CallbackManager)getFragmentManager().findFragmentByTag(CallbackManager.TAG);
         if (reFragment == null) {
-            presenter = createPresenter();
-            reFragment = new RetainFragment();
+            reFragment = new CallbackManager();
             getFragmentManager().beginTransaction()
-                    .add(reFragment, RetainFragment.TAG)
+                    .add(reFragment, CallbackManager.TAG)
                     .commit();
 
-        }else {
-            //noinspection unchecked
-            presenter = (P)reFragment.getPresenter();
         }
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+        presenter = createPresenter();
     }
 
     protected abstract P createPresenter();

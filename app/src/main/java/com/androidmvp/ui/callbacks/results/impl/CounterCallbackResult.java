@@ -1,6 +1,6 @@
-package com.androidmvp.callbacks.results.impl;
+package com.androidmvp.ui.callbacks.results.impl;
 
-import com.androidmvp.callbacks.results.CallbackResult;
+import com.androidmvp.ui.callbacks.results.CallbackResult;
 
 /**
  * Created by Zatsepin on 14.10.2015.

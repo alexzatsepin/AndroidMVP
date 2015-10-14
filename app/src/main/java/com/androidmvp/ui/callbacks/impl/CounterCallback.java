@@ -1,8 +1,8 @@
-package com.androidmvp.callbacks.impl;
+package com.androidmvp.ui.callbacks.impl;
 
-import com.androidmvp.callbacks.BaseActivityUICallback;
-import com.androidmvp.callbacks.results.impl.CounterCallbackResult;
-import com.androidmvp.views.activities.TestActivity;
+import com.androidmvp.ui.callbacks.BaseActivityUICallback;
+import com.androidmvp.ui.callbacks.results.impl.CounterCallbackResult;
+import com.androidmvp.ui.activities.impl.TestActivity;
 
 /**
  * Created by Zatsepin on 14.10.2015.

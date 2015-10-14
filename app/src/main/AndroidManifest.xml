@@ -1,11 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="androidmvc.com.androidmvc">
+    package="com.zatsepin.androidmvc">
 
     <application android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="com.androidmvp.model.facade.impl.CounterApplication">
 
-        <activity android:name="com.androidmvp.views.activities.TestActivity">
+        <activity android:name="com.androidmvp.ui.activities.impl.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

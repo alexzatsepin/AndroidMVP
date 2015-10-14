@@ -1,4 +1,4 @@
-package com.androidmvp.callbacks.results;
+package com.androidmvp.ui.callbacks.results;
 
 /**
  * Created by Zatsepin on 14.10.2015.

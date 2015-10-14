@@ -1,6 +1,6 @@
 package com.androidmvp.presenters;
 
-import com.androidmvp.callbacks.Detachable;
+import com.androidmvp.ui.callbacks.Detachable;
 
 import java.util.List;
 

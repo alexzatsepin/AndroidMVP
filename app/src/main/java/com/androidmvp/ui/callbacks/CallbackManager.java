@@ -1,23 +1,20 @@
-package com.androidmvp.views.activities;
+package com.androidmvp.ui.callbacks;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 
-import com.androidmvp.presenters.Presenter;
-import com.androidmvp.presenters.PresenterAccessor;
-import com.androidmvp.callbacks.Detachable;
+import com.androidmvp.model.facade.BaseApplication;
+import com.androidmvp.model.facade.BaseDataManager;
 
 /**
  * Created by Zatsepin on 14.10.2015.
  */
-public class RetainFragment extends Fragment implements PresenterAccessor {
-    static final String LOG_TAG = RetainFragment.class.getName();
-    static final String TAG = "retain_fragment";
-
-    private Presenter presenter;
+public class CallbackManager extends Fragment {
+    public static final String TAG = "retain_fragment";
+    private static final String LOG_TAG = CallbackManager.class.getName();
+/*
+    private Presenter presenter;*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +25,7 @@ public class RetainFragment extends Fragment implements PresenterAccessor {
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
-        if (context instanceof PresenterAccessor) {
+/*        if (context instanceof PresenterAccessor) {
             PresenterAccessor accessor = (PresenterAccessor) context;
             if (presenter == null) {
                 presenter = accessor.getPresenter();
@@ -39,21 +36,31 @@ public class RetainFragment extends Fragment implements PresenterAccessor {
             }
         } else {
             throw new AssertionError("The '" + context + "' must implement the PresenterAccessor interface");
+        }*/
+        BaseDataManager dataManager = getBaseDataManager(context);
+        for (Detachable callback: dataManager.getUiCallbacks()) {
+            //FIXME: potential cce exception
+            callback.onAttach(context);
         }
+    }
 
+    private BaseDataManager getBaseDataManager(Activity context) {
+        BaseApplication<BaseDataManager> app = (BaseApplication<BaseDataManager>)context.getApplication();
+        return app.getDataManager();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        for (Detachable callback : presenter.getCallbacks()) {
+        BaseDataManager dataManager = getBaseDataManager(getActivity());
+        for (Detachable callback : dataManager.getUiCallbacks()) {
             callback.onDetach();
         }
     }
 
-    @Override
+/*    @Override
     @NonNull
     public Presenter getPresenter() {
         return presenter;
-    }
+    }*/
 }

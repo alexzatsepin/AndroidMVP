@@ -2,8 +2,6 @@ package com.androidmvp.model.facade;
 
 import android.app.Application;
 
-import com.androidmvp.model.facade.DataManager;
-
 /**
  * Created by Zatsepin on 15.10.2015.
  */

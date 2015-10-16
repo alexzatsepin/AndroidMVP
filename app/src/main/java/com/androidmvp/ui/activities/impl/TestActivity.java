@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.androidmvp.ui.callbacks.impl.AndroidDeveloperCallback;
 import com.androidmvp.ui.callbacks.impl.CounterCallback;
 import com.androidmvp.ui.callbacks.results.impl.CounterCallbackResult;
 import com.androidmvp.model.facade.impl.CounterApplication;
@@ -17,6 +18,7 @@ import com.zatsepin.androidmvc.R;
  */
 public class TestActivity extends BaseActivity<TestPresenter> {
     TextView counterView;
+    TextView pageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,14 @@ public class TestActivity extends BaseActivity<TestPresenter> {
             }
         });
         counterView = (TextView)findViewById(R.id.counterValue);
+        Button button = (Button)findViewById(R.id.load_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().loadAndroidPage(new AndroidDeveloperCallback(TestActivity.this));
+            }
+        });
+        pageView = (TextView)findViewById(R.id.page_text);
     }
 
     @Override
@@ -39,5 +49,9 @@ public class TestActivity extends BaseActivity<TestPresenter> {
 
     public void updateCounter(CounterCallbackResult result) {
         counterView.setText("" + result.getCounter());
+    }
+
+    public void showAndroidPage(String page) {
+        pageView.setText(page);
     }
 }

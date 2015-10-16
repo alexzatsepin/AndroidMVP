@@ -18,4 +18,9 @@ public class TestPresenter extends BasePresenter<CounterApplication> {
         CounterDataManager dataManager = getApplication().getDataManager();
         dataManager.startCounter(callback);
     }
+
+    public void loadAndroidPage(final CompleteCallbackUI callbackUI) {
+        CounterDataManager dataManager = getApplication().getDataManager();
+        dataManager.loadAndroidDeveloper(callbackUI);
+    }
 }

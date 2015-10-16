@@ -13,8 +13,18 @@ public class LogUtils {
     }
 
     public static void d(String tag, String message, Throwable throwable) {
-        if (Log.isLoggable(tag, Log.DEBUG)) {
+//        if (Log.isLoggable(tag, Log.DEBUG)) {
             Log.d(tag, message, throwable);
-        }
+//        }
+    }
+
+    public static void e(String tag, String message) {
+        e(tag, message, null);
+    }
+
+    public static void e(String tag, String message, Throwable throwable) {
+//        if (Log.isLoggable(tag, Log.ERROR)) {
+            Log.e(tag, message, throwable);
+//        }
     }
 }

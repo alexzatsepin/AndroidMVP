@@ -1,7 +1,9 @@
 package com.androidmvp.model.facade;
 
+import com.androidmvp.model.commands.Command;
+import com.androidmvp.model.network.request.Request;
+import com.androidmvp.model.network.request.listener.RequestListener;
 import com.androidmvp.ui.callbacks.CompleteCallbackUI;
-import com.androidmvp.model.commands.CommandExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +16,11 @@ public class BaseDataManager implements DataManager {
     private final List<CompleteCallbackUI> uiCallbacks = new ArrayList<>();
 
     private final CommandExecutor commandExecutor;
+    private final NetworkManager networkManager;
 
-    public BaseDataManager(CommandExecutor commandExecutor) {
+    public BaseDataManager(CommandExecutor commandExecutor, NetworkManager networkManager) {
         this.commandExecutor = commandExecutor;
-    }
-
-    public CommandExecutor getCommandExecutor() {
-        return commandExecutor;
+        this.networkManager = networkManager;
     }
 
     protected void removeUiCallback(CompleteCallbackUI callbackUI) {
@@ -39,5 +39,13 @@ public class BaseDataManager implements DataManager {
 
     public List<CompleteCallbackUI> getUiCallbacks() {
         return uiCallbacks;
+    }
+
+    protected void execute(final Request request, final RequestListener listener) {
+        networkManager.execute(request, listener);
+    }
+
+    protected void executeAsync(final Command command) {
+        commandExecutor.executeAsync(command);
     }
 }

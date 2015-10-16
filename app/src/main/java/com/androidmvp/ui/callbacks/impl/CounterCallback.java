@@ -1,5 +1,7 @@
 package com.androidmvp.ui.callbacks.impl;
 
+import android.support.annotation.NonNull;
+
 import com.androidmvp.ui.callbacks.BaseActivityUICallback;
 import com.androidmvp.ui.callbacks.results.impl.CounterCallbackResult;
 import com.androidmvp.ui.activities.impl.TestActivity;
@@ -15,7 +17,7 @@ public class CounterCallback extends BaseActivityUICallback<TestActivity, Counte
     }
 
     @Override
-    protected void onComplete(TestActivity activity, CounterCallbackResult result) {
+    protected void onComplete(@NonNull TestActivity activity, CounterCallbackResult result) {
         activity.updateCounter(result);
     }
 }

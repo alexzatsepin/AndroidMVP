@@ -49,5 +49,5 @@ public abstract class CompleteCallbackUI<Target, Result extends CallbackResult> 
     }
 
     @MainThread
-    protected abstract void onComplete(Target target, Result result);
+    protected abstract void onComplete(@NonNull Target target, Result result);
 }

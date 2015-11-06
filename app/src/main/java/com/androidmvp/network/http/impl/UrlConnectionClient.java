@@ -1,10 +1,10 @@
-package com.androidmvp.model.network.impl;
+package com.androidmvp.network.http.impl;
 
-import com.androidmvp.model.network.BaseHttpClient;
-import com.androidmvp.model.network.ServerException;
-import com.androidmvp.model.network.request.Request;
-import com.androidmvp.model.network.response.BaseResponse;
-import com.androidmvp.model.network.response.Response;
+import com.androidmvp.network.http.BaseClient;
+import com.androidmvp.network.ServerException;
+import com.androidmvp.network.http.request.Request;
+import com.androidmvp.network.response.BaseResponse;
+import com.androidmvp.network.response.Response;
 import com.androidmvp.util.LogUtils;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.util.zip.GZIPInputStream;
 /**
  * Created by Zatsepin on 17.10.2015.
  */
-public class UrlConnectionClient extends BaseHttpClient {
+public class UrlConnectionClient extends BaseClient {
     private static final String TAG = UrlConnectionClient.class.getSimpleName();
     private int readTimeout;
     private int connectionTimeout;
@@ -87,13 +87,4 @@ public class UrlConnectionClient extends BaseHttpClient {
         return null;
     }
 
-    @Override
-    public void setReadTimeout(int timeout) {
-        readTimeout = timeout;
-    }
-
-    @Override
-    public void setConnectionTimeout(int timeout) {
-        connectionTimeout = timeout;
-    }
 }

@@ -1,4 +1,4 @@
-package com.androidmvp.model.network.response;
+package com.androidmvp.network.response;
 
 /**
  * Created by Zatsepin on 17.10.2015.

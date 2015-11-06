@@ -1,6 +1,6 @@
-package com.androidmvp.model.network.request.impl;
+package com.androidmvp.network.http.request.impl;
 
-import com.androidmvp.model.network.request.Request;
+import com.androidmvp.network.http.request.Request;
 
 /**
  * Created by Zatsepin on 17.10.2015.

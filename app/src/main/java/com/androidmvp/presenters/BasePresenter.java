@@ -1,7 +1,9 @@
 package com.androidmvp.presenters;
 
+import android.support.annotation.NonNull;
+
+import com.androidmvp.model.BusinessLogic;
 import com.androidmvp.ui.callbacks.Detachable;
-import com.androidmvp.model.facade.BaseApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +11,19 @@ import java.util.List;
 /**
  * Created by Zatsepin on 14.10.2015.
  */
-public abstract class BasePresenter<A extends BaseApplication> implements Presenter {
+public abstract class BasePresenter<A extends BusinessLogic> implements Presenter {
     private List<Detachable> callbacks = new ArrayList<>();
 
-    private final A application;
+    @NonNull
+    private final A logic;
 
-    protected BasePresenter(A application) {
-        this.application = application;
+    protected BasePresenter(@NonNull A logic) {
+        this.logic = logic;
     }
 
-    public A getApplication() {
-        return application;
+    @NonNull
+    public A getBusinessLogic() {
+        return logic;
     }
 
     @Override

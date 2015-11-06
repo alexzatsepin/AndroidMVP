@@ -1,28 +1,26 @@
-package com.androidmvp.model.facade.impl;
+package com.androidmvp.model.impl;
 
-import com.androidmvp.model.network.ClientFactory;
-import com.androidmvp.model.facade.NetworkManager;
-import com.androidmvp.model.network.request.impl.AndroidDeveloperRequest;
-import com.androidmvp.model.network.request.listener.RequestListener;
-import com.androidmvp.model.network.response.Response;
+import com.androidmvp.network.ClientFactory;
+import com.androidmvp.network.Network;
+import com.androidmvp.network.http.request.impl.AndroidDeveloperRequest;
+import com.androidmvp.network.http.request.listener.RequestListener;
+import com.androidmvp.network.response.Response;
 import com.androidmvp.ui.callbacks.CompleteCallbackUI;
 import com.androidmvp.ui.callbacks.results.impl.AndroidDeveloperCallbackResult;
 import com.androidmvp.ui.callbacks.results.impl.CounterCallbackResult;
-import com.androidmvp.model.facade.CommandExecutor;
 import com.androidmvp.model.commands.impl.CounterCommand;
 import com.androidmvp.model.commands.listeners.CounterListener;
-import com.androidmvp.model.facade.BaseDataManager;
+import com.androidmvp.model.BaseBusinessLogic;
 
 import java.util.concurrent.Executors;
 
 /**
  * Created by Zatsepin on 15.10.2015.
  */
-public class CounterDataManager extends BaseDataManager {
+public class CounterBusinessLogic extends BaseBusinessLogic {
 
-    public CounterDataManager() {
-        super(new CommandExecutor(Executors.newSingleThreadExecutor()),
-                new NetworkManager(ClientFactory.createUrlConnectionClient(10000, 10000),
+    public CounterBusinessLogic(Network network) {
+        super(new Network(ClientFactory.createUrlConnectionClient(10000, 10000),
                         Executors.newSingleThreadExecutor()));
     }
 
@@ -35,14 +33,13 @@ public class CounterDataManager extends BaseDataManager {
                 result.setCounter(counter);
                 //noinspection unchecked
                 callbackUI.complete(result);
-                removeUiCallback(callbackUI);
             }
         }));
     }
 
     public void loadAndroidDeveloper(final CompleteCallbackUI callbackUI) {
         addUiCallback(callbackUI);
-        execute(new AndroidDeveloperRequest(), new RequestListener() {
+        executeNetworkRequest(new AndroidDeveloperRequest(), new RequestListener() {
             @Override
             public void onComplete(Response response) {
                 AndroidDeveloperCallbackResult result = new AndroidDeveloperCallbackResult();

@@ -1,4 +1,4 @@
-package com.androidmvp.model.network;
+package com.androidmvp.network;
 
 import java.io.IOException;
 

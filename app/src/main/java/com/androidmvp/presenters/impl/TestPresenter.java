@@ -1,26 +1,23 @@
 package com.androidmvp.presenters.impl;
 
 import com.androidmvp.ui.callbacks.CompleteCallbackUI;
-import com.androidmvp.model.facade.impl.CounterApplication;
-import com.androidmvp.model.facade.impl.CounterDataManager;
+import com.androidmvp.model.impl.CounterBusinessLogic;
 import com.androidmvp.presenters.BasePresenter;
 
 /**
  * Created by Zatsepin on 14.10.2015.
  */
-public class TestPresenter extends BasePresenter<CounterApplication> {
+public class TestPresenter extends BasePresenter<CounterBusinessLogic> {
 
-    public TestPresenter(CounterApplication app) {
-        super(app);
+    public TestPresenter(CounterBusinessLogic logic) {
+        super(logic);
     }
 
     public void doSomeLong(final CompleteCallbackUI callback) {
-        CounterDataManager dataManager = getApplication().getDataManager();
-        dataManager.startCounter(callback);
+        getBusinessLogic().startCounter(callback);
     }
 
     public void loadAndroidPage(final CompleteCallbackUI callbackUI) {
-        CounterDataManager dataManager = getApplication().getDataManager();
-        dataManager.loadAndroidDeveloper(callbackUI);
+        getBusinessLogic().loadAndroidDeveloper(callbackUI);
     }
 }

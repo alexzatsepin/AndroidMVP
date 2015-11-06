@@ -1,35 +1,31 @@
-package com.androidmvp.model.facade;
+package com.androidmvp.network;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.androidmvp.model.network.HttpClient;
-import com.androidmvp.model.network.ServerException;
-import com.androidmvp.model.network.request.Request;
-import com.androidmvp.model.network.request.listener.RequestListener;
-import com.androidmvp.model.network.response.BaseResponse;
-import com.androidmvp.model.network.response.Response;
-import com.androidmvp.util.LogUtils;
+import com.androidmvp.network.http.request.Request;
+import com.androidmvp.network.http.request.listener.RequestListener;
+import com.androidmvp.network.response.BaseResponse;
+import com.androidmvp.network.response.Response;
 
-import java.io.IOException;
 import java.util.concurrent.Executor;
 
 /**
  * Created by Zatsepin on 17.10.2015.
  */
-public class NetworkManager {
-    private final static String TAG = NetworkManager.class.getSimpleName();
+public class Network {
+    private final static String TAG = Network.class.getSimpleName();
     @NonNull
-    private final HttpClient client;
+    private final Client client;
     @NonNull
     private final Executor executor;
 
-    public NetworkManager(@NonNull HttpClient client, @NonNull Executor executor) {
+    public Network(@NonNull Client client, @NonNull Executor requestExecutor) {
         this.client = client;
-        this.executor = executor;
+        this.executor = requestExecutor;
     }
 
-    void execute(@NonNull final Request request, @Nullable final RequestListener listener) {
+    public void execute(@NonNull final Request request, @Nullable final RequestListener listener) {
         executor.execute(new Runnable() {
             @Override
             public void run() {

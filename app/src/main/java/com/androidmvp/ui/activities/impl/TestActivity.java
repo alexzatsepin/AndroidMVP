@@ -5,10 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.androidmvp.model.impl.CounterBusinessLogic;
 import com.androidmvp.ui.callbacks.impl.AndroidDeveloperCallback;
 import com.androidmvp.ui.callbacks.impl.CounterCallback;
 import com.androidmvp.ui.callbacks.results.impl.CounterCallbackResult;
-import com.androidmvp.model.facade.impl.CounterApplication;
+import com.androidmvp.model.impl.CounterApplication;
 import com.androidmvp.presenters.impl.TestPresenter;
 import com.androidmvp.ui.activities.BaseActivity;
 import com.zatsepin.androidmvc.R;
@@ -44,7 +45,8 @@ public class TestActivity extends BaseActivity<TestPresenter> {
 
     @Override
     protected TestPresenter createPresenter() {
-        return new TestPresenter((CounterApplication)getApplication());
+        CounterBusinessLogic businessLogic = ((CounterApplication)getApplication()).getBusinessLogic();
+        return new TestPresenter(businessLogic);
     }
 
     public void updateCounter(CounterCallbackResult result) {

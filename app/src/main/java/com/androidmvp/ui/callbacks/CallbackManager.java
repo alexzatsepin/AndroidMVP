@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 
-import com.androidmvp.model.facade.BaseApplication;
-import com.androidmvp.model.facade.BaseDataManager;
+import com.androidmvp.model.BaseApplication;
+import com.androidmvp.model.BaseBusinessLogic;
+import com.androidmvp.model.BusinessLogic;
 
 /**
  * Created by Zatsepin on 14.10.2015.
@@ -13,8 +14,6 @@ import com.androidmvp.model.facade.BaseDataManager;
 public class CallbackManager extends Fragment {
     public static final String TAG = "retain_fragment";
     private static final String LOG_TAG = CallbackManager.class.getName();
-/*
-    private Presenter presenter;*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,42 +24,25 @@ public class CallbackManager extends Fragment {
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
-/*        if (context instanceof PresenterAccessor) {
-            PresenterAccessor accessor = (PresenterAccessor) context;
-            if (presenter == null) {
-                presenter = accessor.getPresenter();
-            }
-            for (Detachable callback : presenter.getCallbacks()) {
-                //noinspection unchecked
-                callback.onAttach(context);
-            }
-        } else {
-            throw new AssertionError("The '" + context + "' must implement the PresenterAccessor interface");
-        }*/
-        BaseDataManager dataManager = getBaseDataManager(context);
+        BaseBusinessLogic dataManager = getBusinessLogic(context);
         for (Detachable callback: dataManager.getUiCallbacks()) {
             //FIXME: potential cce exception
             callback.onAttach(context);
         }
     }
 
-    private BaseDataManager getBaseDataManager(Activity context) {
-        BaseApplication<BaseDataManager> app = (BaseApplication<BaseDataManager>)context.getApplication();
-        return app.getDataManager();
+    private static BaseBusinessLogic getBusinessLogic(Activity context) {
+        @SuppressWarnings("unchecked")
+        BaseApplication app = (BaseApplication)context.getApplication();
+        return (BaseBusinessLogic)app.getBusinessLogic();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        BaseDataManager dataManager = getBaseDataManager(getActivity());
+        BaseBusinessLogic dataManager = getBusinessLogic(getActivity());
         for (Detachable callback : dataManager.getUiCallbacks()) {
             callback.onDetach();
         }
     }
-
-/*    @Override
-    @NonNull
-    public Presenter getPresenter() {
-        return presenter;
-    }*/
 }

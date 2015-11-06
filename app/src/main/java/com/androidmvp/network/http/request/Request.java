@@ -1,4 +1,4 @@
-package com.androidmvp.model.network.request;
+package com.androidmvp.network.http.request;
 
 /**
  * Created by Zatsepin on 17.10.2015.
